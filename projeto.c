@@ -103,7 +103,7 @@ static void liberarBiblioteca(void)
 static void exibirMenu(void)
 {
     // TODO: implementar exibi��o do menu principal com as op��ess de impress�o
-    printf("===== MENU =====\n1 - Configurar Conexao\n2 - Abrir Conexao\n3 - Impressao Texto\n4 - Impressao QRCode\n5 - Impressao Cod Barras\n6 - Impressao XML SAT\n7 - Impressao XML Canc SAT\n8 - Abrir Gaveta Elgin\n9 - Abrir Gaveta\n10 - Sinal Sonoro\n0 - Fechar Conexao e Sair");
+    printf("===== MENU =====\n1 - Configurar Conexao\n2 - Abrir Conexao\n3 - Impressao Texto\n4 - Impressao QRCode\n5 - Impressao Cod Barras\n6 - Impressao XML SAT\n7 - Impressao XML Canc SAT\n8 - Abrir Gaveta Elgin\n9 - Abrir Gaveta\n10 - Sinal Sonoro\n0 - Fechar Conexao e Sair\n");
 }
 
 static void configurarConexao(void) // Finalizada
@@ -281,8 +281,51 @@ int main(void)
     while (1) {
         
         //construir o menu e chamar as fun��es aqui!!!
-        
-        
+        exibirMenu();
+        scanf("%i", &opcao);
+        switch (opcao)
+        {
+        	case 1:
+        		exibirMenu();
+        		break;
+        	
+        	case 2:
+        		configurarConexao();
+        		abrirConexao();
+        		break;
+        	
+        	case 3:
+        		imprimirTexto();
+        		break;
+        	
+        	case 4:
+        		imprimirQRCode();
+        		break;
+        	
+        	case 5:
+        		imprimirCodigoBarras();
+        		break;
+        	
+        	case 6:
+        		imprimirXMLSAT();
+        		break;
+        	
+        	case 7:
+        		imprimirXMLCancelamentoSAT();
+        		break;
+        	
+        	case 8:
+        		abrirGavetaElginOpc();
+        		break;
+        		
+        	case 9:
+        		abrirGavetaOpc();
+        		break;
+        		
+        	case 10:
+        		emitirSinalSonoro();
+        		break;
+		}
     }
 }
 
