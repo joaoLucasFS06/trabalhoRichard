@@ -6,7 +6,7 @@
 /* ======================= Config DLL ======================= */
 static HMODULE g_hDll = NULL;
 
-/* Convenção de chamada (Windows): __stdcall */
+/* Convenï¿½ï¿½o de chamada (Windows): __stdcall */
 #ifndef CALLCONV
 #  define CALLCONV WINAPI
 #endif
@@ -41,7 +41,7 @@ static ImprimeXMLSAT_t                ImprimeXMLSAT                = NULL;
 static ImprimeXMLCancelamentoSAT_t    ImprimeXMLCancelamentoSAT    = NULL;
 static InicializaImpressora_t         InicializaImpressora         = NULL;
 
-/* ======================= Configuração ======================= */
+/* ======================= Configuraï¿½ï¿½o ======================= */
 static int   g_tipo      = 1;
 static char  g_modelo[64] = "i9";
 static char  g_conexao[128] = "USB";
@@ -53,7 +53,7 @@ static int   g_conectada = 0;
     do {                                                                         \
         name = (name##_t)GetProcAddress((HMODULE)(h), #name);                    \
         if (!(name)) {                                                           \
-            fprintf(stderr, "Falha ao resolver símbolo %s (erro=%lu)\n",         \
+            fprintf(stderr, "Falha ao resolver sï¿½mbolo %s (erro=%lu)\n",         \
                     #name, GetLastError());                                      \
             return 0;                                                            \
         }                                                                        \
@@ -64,7 +64,7 @@ static void flush_entrada(void) {
     while ((c = getchar()) != '\n' && c != EOF) { }
 }
 
-/* ======================= Funções para manipular a DLL ======================= */
+/* ======================= Funï¿½ï¿½es para manipular a DLL ======================= */
 static int carregarFuncoes(void)
 {
     g_hDll = LoadLibraryA("E1_Impressora01.dll");
@@ -98,17 +98,17 @@ static void liberarBiblioteca(void)
     }
 }
 
-/* ======================= Funções a serem implementadas pelos alunos ======================= */
+/* ======================= Funï¿½ï¿½es a serem implementadas pelos alunos ======================= */
 
 static void exibirMenu(void)
 {
-    // TODO: implementar exibição do menu principal com as opções de impressão
+    // TODO: implementar exibiï¿½ï¿½o do menu principal com as opï¿½ï¿½es de impressï¿½o
     printf("===== MENU =====\n1 - Configurar Conexao\n2 - Abrir Conexao\n3 - Impressao Texto\n4 - Impressao QRCode\n5 - Impressao Cod Barras\n6 - Impressao XML SAT\n7 - Impressao XML Canc SAT\n8 - Abrir Gaveta Elgin\n9 - Abrir Gaveta\n10 - Sinal Sonoro\n0 - Fechar Conexao e Sair");
 }
 
 static void configurarConexao(void)
 {
-    // TODO: pedir ao usuário tipo, modelo, conexão e parâmetro
+    // TODO: pedir ao usuï¿½rio tipo, modelo, conexï¿½o e parï¿½metro
     int g_tipo;
     char g_modelo[5];
     char g_conexao[5];
@@ -125,7 +125,7 @@ static void configurarConexao(void)
     printf("Dados salvos com sucesso\n");
 }
 
-static void abrirConexao(void)
+static void abrirConexao(void) // Finalizada
 {	
 	// TODO: chamar AbreConexaoImpressora e validar retorno
 	if(g_conectada == 0){
@@ -141,7 +141,7 @@ static void abrirConexao(void)
 	}
 }
 
-static void fecharConexao(void)
+static void fecharConexao(void) // Finalizada
 {
     // TODO: chamar FechaConexaoImpressora e tratar retorno
     if (g_conectada == 1) {
@@ -149,7 +149,7 @@ static void fecharConexao(void)
 	    if (retorno == 0) {
 	    	printf("Conexao encerrada com sucesso.\n");
 		} else {
-			printf("Ocorreu um problema ao encerrar a conexao.\n");
+			printf("Ocorreu um problema ao encerrar a conexao. Retorno: %i\n", retorno);
 		}
 	} else {
 		printf("A impressora nao esta conectada.\n");
@@ -157,40 +157,46 @@ static void fecharConexao(void)
     
 }
 
-static void imprimirTexto(void)
+static void imprimirTexto(void) // Finalizada
 {
-    // TODO: solicitar texto do usuário e chamar ImpressaoTexto
+    // TODO: solicitar texto do usuï¿½rio e chamar ImpressaoTexto
     // incluir AvancaPapel e Corte no final
-    char texto[200];
     if (g_conectada == 1) {
-    	printf("Digite o texto a ser impresso: ");
-    	scanf("%s", &texto);
+        char texto[30];
+        printf("Digite o texto a ser impresso: ");
+        scanf("%s", &texto);
+    	ImpressaoTexto(texto, 1, 4, 0);
+        AvancaPapel(2);
+        Corte(2);
 	} else {
 		printf("A impressora nao esta conectada.\n")
 	}
-    
 }
 
-static void imprimirQRCode(void)
+static void imprimirQRCode(void) // Finalizada
 {
-    // TODO: solicitar conteúdo do QRCode e chamar ImpressaoQRCode(texto, 6, 4)
+    // TODO: solicitar conteï¿½do do QRCode e chamar ImpressaoQRCode(texto, 6, 4)
     // incluir AvancaPapel e Corte no final
     if (g_conectada == 1) {
     	char conteudo[30];
     	printf("Digite o conteudo do QRCode: ");
     	scanf("%s", &conteudo);
     	ImpressaoQRCode(conteudo, 6, 4);
+        AvancaPapel(2);
+        Corte(2);
 	} else {
 		printf("A impressora nao esta conectada.\n")
 	}
 }
 
-static void imprimirCodigoBarras(void)
+static void imprimirCodigoBarras(void) // Finalizada
 {
     // TODO: usar ImpressaoCodigoBarras(8, "{A012345678912", 100, 2, 3)
     // incluir AvancaPapel e Corte no final
     if (g_conectada == 1) {
     	ImpressaoCodigoBarras(8, "{A012345678912}", 100, 2, 3);
+        AvancaPapel(2);
+        Corte(2);
 	} else {
 		printf("A impressora nao esta conectada.\n")
 	}
@@ -228,7 +234,7 @@ static void imprimirXMLCancelamentoSAT(void)
 	}
 }
 
-static void abrirGavetaElginOpc(void)
+static void abrirGavetaElginOpc(void) // Finalizada
 {
     // TODO: chamar AbreGavetaElgin(1, 50, 50)
     if (g_conectada == 1) {
@@ -239,7 +245,7 @@ static void abrirGavetaElginOpc(void)
 	}
 }
 
-static void abrirGavetaOpc(void)
+static void abrirGavetaOpc(void) // Finalizada
 {
     // TODO: chamar AbreGaveta(1, 5, 10)
     if (g_conectada == 1) {
@@ -250,7 +256,7 @@ static void abrirGavetaOpc(void)
 	}
 }
 
-static void emitirSinalSonoro(void)
+static void emitirSinalSonoro(void) // Finalizada
 {
     // TODO: chamar SinalSonoro(4, 50, 5)
     if (g_conectada == 1) {
@@ -261,7 +267,7 @@ static void emitirSinalSonoro(void)
 	}
 }
 
-/* ======================= Função principal ======================= */
+/* ======================= Funï¿½ï¿½o principal ======================= */
 int main(void)
 {
     if (!carregarFuncoes()) {
@@ -271,7 +277,7 @@ int main(void)
     int opcao = 0;
     while (1) {
         
-        //construir o menu e chamar as funçoes aqui!!!
+        //construir o menu e chamar as funï¿½oes aqui!!!
                 
         
     }
