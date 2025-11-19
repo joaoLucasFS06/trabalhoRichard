@@ -6,7 +6,7 @@
 /* ======================= Config DLL ======================= */
 static HMODULE g_hDll = NULL;
 
-/* Conven��o de chamada (Windows): __stdcall */
+/* Conven��es de chamada (Windows): __stdcall */
 #ifndef CALLCONV
 #  define CALLCONV WINAPI
 #endif
@@ -102,17 +102,18 @@ static void liberarBiblioteca(void)
 
 static void exibirMenu(void)
 {
-    // TODO: implementar exibi��o do menu principal com as op��es de impress�o
+    // TODO: implementar exibi��o do menu principal com as op��ess de impress�o
     printf("===== MENU =====\n1 - Configurar Conexao\n2 - Abrir Conexao\n3 - Impressao Texto\n4 - Impressao QRCode\n5 - Impressao Cod Barras\n6 - Impressao XML SAT\n7 - Impressao XML Canc SAT\n8 - Abrir Gaveta Elgin\n9 - Abrir Gaveta\n10 - Sinal Sonoro\n0 - Fechar Conexao e Sair");
 }
 
-static void configurarConexao(void)
+static void configurarConexao(void) // Finalizada
 {
-    // TODO: pedir ao usu�rio tipo, modelo, conex�o e par�metro
+    // TODO: pedir ao usu�rio tipo, modelo, conex�oo e par�metro
     int g_tipo;
     char g_modelo[5];
     char g_conexao[5];
     int g_parametro;
+    
     printf("Tipo de Comunicacao\n1 - USB\n2 - RS232\n3 - TCP/IP\n\n");
     scanf("%i", &g_tipo);
     printf("Modelo para Conexao: ");
@@ -169,7 +170,7 @@ static void imprimirTexto(void) // Finalizada
         AvancaPapel(2);
         Corte(2);
 	} else {
-		printf("A impressora nao esta conectada.\n")
+		printf("A impressora nao esta conectada.\n");
 	}
 }
 
@@ -185,7 +186,7 @@ static void imprimirQRCode(void) // Finalizada
         AvancaPapel(2);
         Corte(2);
 	} else {
-		printf("A impressora nao esta conectada.\n")
+		printf("A impressora nao esta conectada.\n");
 	}
 }
 
@@ -198,7 +199,7 @@ static void imprimirCodigoBarras(void) // Finalizada
         AvancaPapel(2);
         Corte(2);
 	} else {
-		printf("A impressora nao esta conectada.\n")
+		printf("A impressora nao esta conectada.\n");
 	}
 }
 
@@ -207,9 +208,10 @@ static void imprimirXMLSAT(void)
     // TODO: ler o arquivo ./XMLSAT.xml e enviar via ImprimeXMLSAT
     // incluir AvancaPapel e Corte no final
     if (g_conectada == 1) {
-    	
+    	AvancaPapel(2);
+    	Corte(2);
 	} else {
-		printf("A impressora nao esta conectada.\n")
+		printf("A impressora nao esta conectada.\n");
 	}
 }
 
@@ -228,9 +230,10 @@ static void imprimirXMLCancelamentoSAT(void)
         */
         
     if (g_conectada == 1) {
-    	
+    	AvancaPapel(2);
+		Corte(2);
 	} else {
-		printf("A impressora nao esta conectada.\n")
+		printf("A impressora nao esta conectada.\n");
 	}
 }
 
@@ -277,8 +280,8 @@ int main(void)
     int opcao = 0;
     while (1) {
         
-        //construir o menu e chamar as fun�oes aqui!!!
-                
+        //construir o menu e chamar as fun��es aqui!!!
+        
         
     }
 }
