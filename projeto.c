@@ -286,11 +286,10 @@ int main(void)
         switch (opcao)
         {
         	case 1:
-        		exibirMenu();
+        		configurarConexao();
         		break;
         	
         	case 2:
-        		configurarConexao();
         		abrirConexao();
         		break;
         	
